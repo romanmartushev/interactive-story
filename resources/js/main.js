@@ -25,9 +25,39 @@ Vue.component('modal',{
 new Vue({
    el: '#root',
    data: {
-       show: false
+       show: false,
+       beginning: true,
+       meet_charlie:false,
+       getName: false,
+       name: "",
+       charlies_message: ""
    },
     methods: {
+        transitionToMeetCharlie() {
+            const vm = this;
+            this.beginning = false;
+            setTimeout(() => {
+                vm.meet_charlie = true;
+            },1200);
+        },
+        transitionToNiceToMeetYou(){
+            const vm = this;
+            this.meet_charlie = false;
+            this.charlies_message = "It Is Nice To Meet You Too!";
+            setTimeout(() => {
+                vm.getName = true;
+            },1200);
+        },
+        transitionToThatsAFunnyName(){
+            const vm = this;
+            this.meet_charlie = false;
+            this.charlies_message = "Well..Um..I guess it is..";
+            setTimeout(() => {
+                vm.getName = true;
+            },1200);
+        }
+    },
+    mounted() {
 
     }
 });

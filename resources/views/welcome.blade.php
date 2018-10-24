@@ -11,17 +11,15 @@
     </head>
     <body>
         <div class="flex-center position-ref full-height" id="root">
-            <modal v-show="show" @close="show = false"></modal>
-            <div class="content">
-                <div class="title m-b-md">
-                    Help Charlie
-                </div>
-                <div>
-                    <button class="btn btn-dark" @click="show = true">Background</button>
-                    <button class="btn btn-dark">Begin</button>
-                    <a class="btn btn-dark" href="https://github.com/romanmartushev/interactive-story" target="_blank" role="button">GitHub</a>
-                </div>
-            </div>
+            <transition name="fade">
+                @include('beginning')
+            </transition>
+            <transition name="fade">
+                @include('charlie.charlie1')
+            </transition>
+            <transition name="fade">
+                @include('charlie.charlie2')
+            </transition>
         </div>
     <script src="/js/main.js"></script>
     </body>

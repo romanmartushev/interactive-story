@@ -566,14 +566,44 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('modal', {
-  template: '\n        <div tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="position: fixed">\n          <div class="modal-dialog" role="document">\n            <div class="modal-content">\n              <div class="modal-header">\n                <h5 class="modal-title" id="exampleModalLabel">Background</h5>\n                <button type="button" class="close" @click="$emit(\'close\')" aria-label="Close">\n                  <span aria-hidden="true">&times;</span>\n                </button>\n              </div>\n              <div class="modal-body">\n                You will be interacting with a entity. He will learn from your actions. Your answers and actions will\n                determine his behavior and his final personality. Good Luck!\n              </div>\n              <div class="modal-footer">\n                <button type="button" class="btn btn-secondary" @click="$emit(\'close\')">Close</button>\n              </div>\n            </div>\n          </div>\n        </div>\n    '
+    template: '\n        <div tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="position: fixed">\n          <div class="modal-dialog" role="document">\n            <div class="modal-content">\n              <div class="modal-header">\n                <h5 class="modal-title" id="exampleModalLabel">Background</h5>\n                <button type="button" class="close" @click="$emit(\'close\')" aria-label="Close">\n                  <span aria-hidden="true">&times;</span>\n                </button>\n              </div>\n              <div class="modal-body">\n                You will be interacting with a entity. He will learn from your actions. Your answers and actions will\n                determine his behavior and his final personality. Good Luck!\n              </div>\n              <div class="modal-footer">\n                <button type="button" class="btn btn-secondary" @click="$emit(\'close\')">Close</button>\n              </div>\n            </div>\n          </div>\n        </div>\n    '
 });
 new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
-  el: '#root',
-  data: {
-    show: false
-  },
-  methods: {}
+    el: '#root',
+    data: {
+        show: false,
+        beginning: true,
+        meet_charlie: false,
+        getName: false,
+        name: "",
+        charlies_message: ""
+    },
+    methods: {
+        transitionToMeetCharlie: function transitionToMeetCharlie() {
+            var vm = this;
+            this.beginning = false;
+            setTimeout(function () {
+                vm.meet_charlie = true;
+            }, 1200);
+        },
+        transitionToNiceToMeetYou: function transitionToNiceToMeetYou() {
+            var vm = this;
+            this.meet_charlie = false;
+            this.charlies_message = "It Is Nice To Meet You Too!";
+            setTimeout(function () {
+                vm.getName = true;
+            }, 1200);
+        },
+        transitionToThatsAFunnyName: function transitionToThatsAFunnyName() {
+            var vm = this;
+            this.meet_charlie = false;
+            this.charlies_message = "Well..Um..I guess it is..";
+            setTimeout(function () {
+                vm.getName = true;
+            }, 1200);
+        }
+    },
+    mounted: function mounted() {}
 });
 
 /***/ }),
