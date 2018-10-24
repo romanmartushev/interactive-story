@@ -14,7 +14,8 @@ let mix = require('laravel-mix');
 mix.js('resources/js/app.js', '/js/app.js')
     .js('node_modules/vue/dist/vue.js','/js/vue.js')
     .js('resources/js/main.js', '/js/main.js')
-    .sass('resources/sass/app.scss', './css/app.css');
+    .sass('resources/sass/app.scss', './css/app.css')
+    .sass('resources/sass/welcome.scss', './css/welcome.css');
 
 // Full API
 // mix.js(src, output);
