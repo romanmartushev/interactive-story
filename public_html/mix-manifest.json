@@ -3,6 +3,5 @@
     "/css/app.css": "/css/app.css",
     "/css/welcome.css": "/css/welcome.css",
     "/css/tic-tac-toe.css": "/css/tic-tac-toe.css",
-    "/js/main.js": "/js/main.js",
-    "/js/tic-tac-toe.js": "/js/tic-tac-toe.js"
+    "/js/main.js": "/js/main.js"
 }

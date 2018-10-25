@@ -10677,12 +10677,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('modal', {
-    template: '\n        <div tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="position: fixed">\n          <div class="modal-dialog" role="document">\n            <div class="modal-content">\n              <div class="modal-header">\n                <h5 class="modal-title" id="exampleModalLabel">Background</h5>\n                <button type="button" class="close" @click="$emit(\'close\')" aria-label="Close">\n                  <span aria-hidden="true">&times;</span>\n                </button>\n              </div>\n              <div class="modal-body content">\n                You will be interacting with a entity. He will learn from your actions. Your answers and actions will\n                determine his behavior and his final personality. Good Luck!\n              </div>\n              <div class="modal-footer">\n                <button type="button" class="btn btn-secondary" @click="$emit(\'close\')">Close</button>\n              </div>\n            </div>\n          </div>\n        </div>\n    '
+    template: '\n        <div tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="position: fixed">\n          <div class="modal-dialog" role="document">\n            <div class="modal-content">\n              <div class="modal-header">\n                <h5 class="modal-title" id="exampleModalLabel"><slot name="header"></slot></h5>\n                <button type="button" class="close" @click="$emit(\'close\')" aria-label="Close">\n                  <span aria-hidden="true">&times;</span>\n                </button>\n              </div>\n              <div class="modal-body content"><slot name="body"></slot></div>\n              <div class="modal-footer">\n                <button type="button" class="btn btn-secondary" @click="$emit(\'close\')">Close</button>\n              </div>\n            </div>\n          </div>\n        </div>\n    '
 });
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     el: '#root',
     data: {
         show: false,
+        show_disclaimer: false,
         beginning: true,
         meet_charlie: false,
         get_name: false,
@@ -10690,6 +10691,7 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
         no_name: false,
         back_to_name: false,
         play_game: false,
+        finished_game: false,
         name: "",
         charlies_message: "",
         alert_message: ""
@@ -10747,26 +10749,24 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
         transitionToPlayGame: function transitionToPlayGame() {
             var vm = this;
             this.accept_name = false;
+            reset();
             setTimeout(function () {
                 vm.play_game = true;
             }, 1200);
         },
         startGame: function startGame(id) {
+            this.charlies_message = "";
+            this.finished_game = false;
             if (id === "dots") {
-                __WEBPACK_IMPORTED_MODULE_1_jquery___default()(".guys, p").css("visibility", "hidden");
-                __WEBPACK_IMPORTED_MODULE_1_jquery___default()("td").css("visibility", "visible");
-                aiCo = "#333";
-                huCo = "red";
-            } else {
-                __WEBPACK_IMPORTED_MODULE_1_jquery___default()(".guys, p").css("visibility", "hidden");
-                __WEBPACK_IMPORTED_MODULE_1_jquery___default()("td").css("visibility", "visible");
+                aiColor = "black";
+                humanColor = "red";
             }
-            __WEBPACK_IMPORTED_MODULE_1_jquery___default()("td").click(function () {
-                move(this, huPlayer, huCo);
+            __WEBPACK_IMPORTED_MODULE_1_jquery___default()(".guys, p").css("visibility", "hidden");
+            __WEBPACK_IMPORTED_MODULE_1_jquery___default()("td").css("visibility", "visible").click(function () {
+                move(this, huPlayer, humanColor);
             });
         }
-    },
-    mounted: function mounted() {}
+    }
 });
 
 var board = [0, 1, 2, 3, 4, 5, 6, 7, 8];
@@ -10774,43 +10774,44 @@ var huPlayer = "P";
 var aiPlayer = "C";
 var iter = 0;
 var round = 0;
-var aiCo = "white";
-var huCo = "#333";
+var aiColor = "red";
+var humanColor = "black";
 
 function move(element, player, color) {
-    if (board[element.id] != "P" && board[element.id] != "C") {
+
+    if (board[element.id] !== "P" && board[element.id] !== "C" && !app.finished_game) {
         round++;
         __WEBPACK_IMPORTED_MODULE_1_jquery___default()(element).css("background-color", color);
         board[element.id] = player;
 
         if (winning(board, player)) {
             setTimeout(function () {
-                alert("YOU WIN");
-                reset();
+                app.charlies_message = "You Won!";
+                app.finished_game = true;
             }, 500);
             return;
         } else if (round > 8) {
             setTimeout(function () {
-                alert("TIE");
-                reset();
+                app.charlies_message = "We Tied!";
+                app.finished_game = true;
             }, 500);
             return;
         } else {
             round++;
             var index = minimax(board, aiPlayer).index;
             var selector = "#" + index;
-            __WEBPACK_IMPORTED_MODULE_1_jquery___default()(selector).css("background-color", aiCo);
+            __WEBPACK_IMPORTED_MODULE_1_jquery___default()(selector).css("background-color", aiColor);
             board[index] = aiPlayer;
             if (winning(board, aiPlayer)) {
                 setTimeout(function () {
-                    alert("YOU LOSE");
-                    reset();
+                    app.charlies_message = "Looks Like I Win!";
+                    app.finished_game = true;
                 }, 500);
                 return;
             } else if (round === 0) {
                 setTimeout(function () {
-                    alert("tie");
-                    reset();
+                    app.charlies_message = "We Tied!";
+                    app.finished_game = true;
                 }, 500);
                 return;
             }
@@ -10819,6 +10820,8 @@ function move(element, player, color) {
 }
 
 function reset() {
+    app.charlies_message = "";
+    app.finished_game = false;
     round = 0;
     board = [0, 1, 2, 3, 4, 5, 6, 7, 8];
     __WEBPACK_IMPORTED_MODULE_1_jquery___default()("td").css("background-color", "transparent");
@@ -10882,17 +10885,16 @@ function minimax(reboard, player) {
 //available spots
 function avail(reboard) {
     return reboard.filter(function (s) {
-        return s != "P" && s != "C";
+        return s !== "P" && s !== "C";
     });
 }
 
 // winning combinations
 function winning(board, player) {
-    if (board[0] == player && board[1] == player && board[2] == player || board[3] == player && board[4] == player && board[5] == player || board[6] == player && board[7] == player && board[8] == player || board[0] == player && board[3] == player && board[6] == player || board[1] == player && board[4] == player && board[7] == player || board[2] == player && board[5] == player && board[8] == player || board[0] == player && board[4] == player && board[8] == player || board[2] == player && board[4] == player && board[6] == player) {
+    if (board[0] === player && board[1] === player && board[2] === player || board[3] === player && board[4] === player && board[5] === player || board[6] === player && board[7] === player && board[8] === player || board[0] === player && board[3] === player && board[6] === player || board[1] === player && board[4] === player && board[7] === player || board[2] === player && board[5] === player && board[8] === player || board[0] === player && board[4] === player && board[8] === player || board[2] === player && board[4] === player && board[6] === player) {
         return true;
-    } else {
-        return false;
     }
+    return false;
 }
 
 /***/ }),

@@ -24,27 +24,21 @@
 }
 
 .guys {
-  position: absolute;
   height: 100px;
   width: 350px;
-  top: 200px;
-  left: 50%;
-  margin-left: -175px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .td-tic-tac {
-  border: 1px solid #333;
+  border: 15px solid #333333;
   height: 100px;
   width: 100px;
-  border-style: solid;
-  border-width: 15px;
   visibility: hidden;
 }
 
 .table-tic-tac {
-  position: absolute;
-  left: 50%;
-  margin-left: -150px;
-  top: 10%;
+  margin-left: auto;
+  margin-right: auto;
 }
 

@@ -12,19 +12,19 @@
     </head>
     <body>
         <div class="flex-center position-ref full-height" id="root">
-            <transition name="fade">
+            <transition name="fade" v-cloak>
                 @include('beginning')
             </transition>
-            <transition name="fade">
+            <transition name="fade" v-cloak>
                 @include('charlie.charlie1')
             </transition>
-            <transition name="fade">
+            <transition name="fade" v-cloak>
                 @include('charlie.charlie2')
             </transition>
-            <transition name="fade">
+            <transition name="fade" v-cloak>
                 @include('charlie.charlie3')
             </transition>
-            <transition name="fade">
+            <transition name="fade" v-cloak>
                 @include('partials.ticTacToe')
             </transition>
         </div>

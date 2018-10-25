@@ -13,7 +13,6 @@ let mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', '/js/app.js')
     .js('resources/js/main.js', '/js/main.js')
-    .js('resources/js/tic-tac-toe.js', '/js/tic-tac-toe.js')
     .sass('resources/sass/app.scss', './css/app.css')
     .sass('resources/sass/welcome.scss', './css/welcome.css')
     .sass('resources/sass/tic-tac-toe.scss', './css/tic-tac-toe.css');

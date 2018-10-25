@@ -7,15 +7,12 @@ Vue.component('modal',{
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Background</h5>
+                <h5 class="modal-title" id="exampleModalLabel"><slot name="header"></slot></h5>
                 <button type="button" class="close" @click="$emit('close')" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div class="modal-body content">
-                You will be interacting with a entity. He will learn from your actions. Your answers and actions will
-                determine his behavior and his final personality. Good Luck!
-              </div>
+              <div class="modal-body content"><slot name="body"></slot></div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" @click="$emit('close')">Close</button>
               </div>
@@ -28,6 +25,7 @@ var app = new Vue({
    el: '#root',
    data: {
        show: false,
+       show_disclaimer: false,
        beginning: true,
        meet_charlie:false,
        get_name: false,
@@ -35,6 +33,7 @@ var app = new Vue({
        no_name: false,
        back_to_name: false,
        play_game: false,
+       finished_game:false,
        name: "",
        charlies_message: "",
        alert_message: ""
@@ -94,27 +93,23 @@ var app = new Vue({
         transitionToPlayGame() {
             const vm = this;
             this.accept_name = false;
+            reset();
             setTimeout(() => {
                 vm.play_game = true;
             },1200);
         },
         startGame(id){
+            this.charlies_message = "";
+            this.finished_game = false;
             if(id === "dots"){
-                $(".guys, p").css("visibility", "hidden");
-                $("td").css("visibility", "visible");
-                aiCo = "#333";
-                huCo = "red";
-            }else{
-                $(".guys, p").css("visibility", "hidden");
-                $("td").css("visibility", "visible");
+                aiColor = "black";
+                humanColor = "red";
             }
-            $("td").click(function() {
-                move(this, huPlayer, huCo);
+            $(".guys, p").css("visibility", "hidden");
+            $("td").css("visibility", "visible").click(function() {
+                move(this, huPlayer, humanColor);
             });
         }
-    },
-    mounted() {
-
     }
 });
 
@@ -123,43 +118,44 @@ var huPlayer = "P";
 var aiPlayer = "C";
 var iter = 0;
 var round = 0;
-var aiCo = "white";
-var huCo = "#333";
+var aiColor = "red";
+var humanColor = "black";
 
 function move(element, player, color) {
-    if (board[element.id] != "P" && board[element.id] != "C") {
+
+    if (board[element.id] !== "P" && board[element.id] !== "C" && !app.finished_game) {
         round++;
         $(element).css("background-color", color);
         board[element.id] = player;
 
         if (winning(board, player)) {
             setTimeout(function() {
-                alert("YOU WIN");
-                reset();
+                app.charlies_message = "You Won!";
+                app.finished_game = true;
             }, 500);
             return;
         } else if (round > 8) {
             setTimeout(function() {
-                alert("TIE");
-                reset();
+                app.charlies_message = "We Tied!";
+                app.finished_game = true;
             }, 500);
             return;
         } else {
             round++;
             var index = minimax(board, aiPlayer).index;
             var selector = "#" + index;
-            $(selector).css("background-color", aiCo);
+            $(selector).css("background-color", aiColor);
             board[index] = aiPlayer;
             if (winning(board, aiPlayer)) {
                 setTimeout(function() {
-                    alert("YOU LOSE");
-                    reset();
+                    app.charlies_message = "Looks Like I Win!";
+                    app.finished_game = true;
                 }, 500);
                 return;
             } else if (round === 0) {
                 setTimeout(function() {
-                    alert("tie");
-                    reset();
+                    app.charlies_message = "We Tied!";
+                    app.finished_game = true;
                 }, 500);
                 return;
             }
@@ -168,6 +164,8 @@ function move(element, player, color) {
 }
 
 function reset() {
+    app.charlies_message = "";
+    app.finished_game = false;
     round = 0;
     board = [0, 1, 2, 3, 4, 5, 6, 7, 8];
     $("td").css("background-color", "transparent");
@@ -230,24 +228,23 @@ function minimax(reboard, player) {
 
 //available spots
 function avail(reboard) {
-    return reboard.filter(s => s != "P" && s != "C");
+    return reboard.filter(s => s !== "P" && s !== "C");
 }
 
 // winning combinations
 function winning(board, player) {
     if (
-        (board[0] == player && board[1] == player && board[2] == player) ||
-        (board[3] == player && board[4] == player && board[5] == player) ||
-        (board[6] == player && board[7] == player && board[8] == player) ||
-        (board[0] == player && board[3] == player && board[6] == player) ||
-        (board[1] == player && board[4] == player && board[7] == player) ||
-        (board[2] == player && board[5] == player && board[8] == player) ||
-        (board[0] == player && board[4] == player && board[8] == player) ||
-        (board[2] == player && board[4] == player && board[6] == player)
+        (board[0] === player && board[1] === player && board[2] === player) ||
+        (board[3] === player && board[4] === player && board[5] === player) ||
+        (board[6] === player && board[7] === player && board[8] === player) ||
+        (board[0] === player && board[3] === player && board[6] === player) ||
+        (board[1] === player && board[4] === player && board[7] === player) ||
+        (board[2] === player && board[5] === player && board[8] === player) ||
+        (board[0] === player && board[4] === player && board[8] === player) ||
+        (board[2] === player && board[4] === player && board[6] === player)
     ) {
         return true;
-    } else {
-        return false;
     }
+        return false;
 }
 
