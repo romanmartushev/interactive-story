@@ -7,6 +7,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>Help Charlie</title>
         <link href="/css/welcome.css" rel="stylesheet" type="text/css">
+        <link href="/css/tic-tac-toe.css" rel="stylesheet" type="text/css">
         <link href="/css/app.css" rel="stylesheet" type="text/css">
     </head>
     <body>
@@ -23,7 +24,11 @@
             <transition name="fade">
                 @include('charlie.charlie3')
             </transition>
+            <transition name="fade">
+                @include('partials.ticTacToe')
+            </transition>
         </div>
     <script src="/js/main.js"></script>
+    <script src="/js/tic-tac-toe.js"></script>
     </body>
 </html>

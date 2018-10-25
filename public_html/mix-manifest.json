@@ -2,5 +2,7 @@
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/css/welcome.css": "/css/welcome.css",
-    "/js/main.js": "/js/main.js"
+    "/css/tic-tac-toe.css": "/css/tic-tac-toe.css",
+    "/js/main.js": "/js/main.js",
+    "/js/tic-tac-toe.js": "/js/tic-tac-toe.js"
 }
