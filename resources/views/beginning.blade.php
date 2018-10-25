@@ -4,7 +4,7 @@
         <template slot="body">
             You will be interacting with a entity. He will learn from your actions. Your answers and actions will
             determine his behavior and his final personality. Good Luck!<br/>
-            <span class="small" @click="show_disclaimer = true">*disclaimer</span>
+            <span class="small" @click="showTheDisclaimer">*disclaimer</span>
         </template>
     </modal>
     <modal v-show="show_disclaimer" @close="show_disclaimer = false">

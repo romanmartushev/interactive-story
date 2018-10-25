@@ -10694,9 +10694,26 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
         finished_game: false,
         name: "",
         charlies_message: "",
-        alert_message: ""
+        alert_message: "",
+        seen_disclaimer: false,
+        funny_name_AI: false,
+        openly_greeted_AI: false,
+        gave_name_first_time: false,
+        gave_name_after_attempts: false,
+        name_attempt_counter: 0,
+        agreed_to_play_game: false,
+        color_of_tic_tac_toe: "Black",
+        played_tic_tac_toe: 0,
+        tie_counter: 0,
+        win_counter: 0,
+        loss_counter: 0,
+        final: false
     },
     methods: {
+        showTheDisclaimer: function showTheDisclaimer() {
+            this.show_disclaimer = true;
+            this.seen_disclaimer = true;
+        },
         transitionToMeetCharlie: function transitionToMeetCharlie() {
             var vm = this;
             this.beginning = false;
@@ -10720,12 +10737,16 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
                 setTimeout(function () {
                     if (answer && vm.name !== "") {
                         vm.accept_name = true;
+                        vm.gave_name_first_time = true;
                     } else {
+                        vm.gave_name_after_attempts = true;
+                        vm.name_attempt_counter++;
                         vm.no_name = true;
                     }
                 }, 1200);
             } else {
                 if (this.name === "") {
+                    vm.name_attempt_counter++;
                     this.alert_message = "I Thought You Would Give Me Your Name?";
                 } else {
                     this.back_to_name = false;
@@ -10749,6 +10770,8 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
         transitionToPlayGame: function transitionToPlayGame() {
             var vm = this;
             this.accept_name = false;
+            this.agreed_to_play_game = true;
+            this.played_tic_tac_toe++;
             reset();
             setTimeout(function () {
                 vm.play_game = true;
@@ -10758,6 +10781,7 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
             this.charlies_message = "";
             this.finished_game = false;
             if (id === "dots") {
+                this.color_of_tic_tac_toe = "Red";
                 aiColor = "black";
                 humanColor = "red";
             }
@@ -10765,7 +10789,15 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
             __WEBPACK_IMPORTED_MODULE_1_jquery___default()("td").css("visibility", "visible").click(function () {
                 move(this, huPlayer, humanColor);
             });
-        }
+        },
+        transitionToFinal: function transitionToFinal() {
+            var vm = this;
+            this.play_game = false;
+            setTimeout(function () {
+                vm.final = true;
+            }, 1200);
+        },
+        saveFriendship: function saveFriendship() {}
     }
 });
 
@@ -10787,12 +10819,14 @@ function move(element, player, color) {
         if (winning(board, player)) {
             setTimeout(function () {
                 app.charlies_message = "You Won!";
+                app.win_counter++;
                 app.finished_game = true;
             }, 500);
             return;
         } else if (round > 8) {
             setTimeout(function () {
                 app.charlies_message = "We Tied!";
+                app.tie_counter++;
                 app.finished_game = true;
             }, 500);
             return;
@@ -10805,12 +10839,14 @@ function move(element, player, color) {
             if (winning(board, aiPlayer)) {
                 setTimeout(function () {
                     app.charlies_message = "Looks Like I Win!";
+                    app.loss_counter++;
                     app.finished_game = true;
                 }, 500);
                 return;
             } else if (round === 0) {
                 setTimeout(function () {
                     app.charlies_message = "We Tied!";
+                    app.tie_counter++;
                     app.finished_game = true;
                 }, 500);
                 return;

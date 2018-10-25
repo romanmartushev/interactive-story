@@ -33,7 +33,7 @@
                 <div class="charlie">@{{ charlies_message }} Would you like to play again? </div>
                 <div>
                     <button class="btn btn-dark" @click="transitionToPlayGame">Yes!</button>
-                    <button class="btn btn-dark">No I Think I Am Done</button>
+                    <button class="btn btn-dark" @click="transitionToFinal">No I Think I Am Done</button>
                 </div>
             </div>
         </transition>

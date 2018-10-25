@@ -27,6 +27,9 @@
             <transition name="fade" v-cloak>
                 @include('partials.ticTacToe')
             </transition>
+            <transition name="fade" v-cloak>
+                @include('partials.final')
+            </transition>
         </div>
     <script src="/js/main.js"></script>
     <script src="/js/tic-tac-toe.js"></script>
