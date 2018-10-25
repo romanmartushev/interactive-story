@@ -20,6 +20,9 @@
             <transition name="fade">
                 @include('charlie.charlie2')
             </transition>
+            <transition name="fade">
+                @include('charlie.charlie3')
+            </transition>
         </div>
     <script src="/js/main.js"></script>
     </body>

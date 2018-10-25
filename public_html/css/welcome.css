@@ -34,6 +34,7 @@ body {
 
 .content {
   text-align: center;
+  text-transform: capitalize;
 }
 
 .title {
