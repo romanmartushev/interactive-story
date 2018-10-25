@@ -11,10 +11,7 @@ let mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', '/js/app.js')
-    .js('resources/js/main.js', '/js/main.js')
-    .sass('resources/sass/app.scss', './css/app.css')
-    .sass('resources/sass/welcome.scss', './css/welcome.css');
+mix.js('src/app.js', 'dist/').sass('src/app.scss', 'dist/');
 
 // Full API
 // mix.js(src, output);
@@ -38,7 +35,7 @@ mix.js('resources/js/app.js', '/js/app.js')
 // mix.sourceMaps(); // Enable sourcemaps
 // mix.version(); // Enable versioning.
 // mix.disableNotifications();
-// mix.setPublicPath('path/to/public_html');
+// mix.setPublicPath('path/to/public');
 // mix.setResourceRoot('prefix/for/resource/locators');
 // mix.autoload({}); <-- Will be passed to Webpack's ProvidePlugin.
 // mix.webpackConfig({}); <-- Override webpack.config.js, without editing the file directly.
