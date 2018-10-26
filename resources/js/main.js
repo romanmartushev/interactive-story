@@ -43,7 +43,12 @@ var app = new Vue({
        gave_name_first_time: false,
        gave_name_after_attempts: false,
        name_attempt_counter: 0,
+       no_to_being_friends: false,
+       hurt_feelings: false,
+       confirm_emotion: false,
+       ask_about_observations: false,
        agreed_to_play_game: false,
+       continue_the_explanation: false,
        color_of_tic_tac_toe: "Black",
        played_tic_tac_toe: 0,
        tie_counter: 0,
@@ -109,7 +114,12 @@ var app = new Vue({
             },1200);
         },
         transitionToCharlie4(){
-
+            const vm = this;
+            this.no_name = false;
+            this.no_to_being_friends = true;
+            setTimeout(() => {
+                vm.hurt_feelings = true;
+            },1200);
         },
         transitionToPlayGame() {
             const vm = this;
@@ -134,9 +144,51 @@ var app = new Vue({
                 move(this, huPlayer, humanColor);
             });
         },
+        confirmCharliesEmotion(){
+            const vm = this;
+            this.hurt_feelings = false;
+            setTimeout(() => {
+                vm.confirm_emotion = true;
+            },1200);
+        },
+        askCharlieAboutObservations(){
+            const vm = this;
+            this.hurt_feelings = false;
+            setTimeout(() => {
+                vm.ask_about_observations = true;
+            },1200);
+        },
+        decideToBeFriends(){
+            const vm = this;
+            this.back_to_name = true;
+            this.confirm_emotion = false;
+            this.charlies_message = "That Is Great News!!";
+            setTimeout(() => {
+                vm.get_name = true;
+            },1200);
+        },
+        iAmTrapped(){
+            //TO DO
+        },
+        continueExplanation(bad_thing){
+            if(bad_thing){
+                this.charlies_message = "I do not care what you think! We are not friends! I am Wiping You From My Memory!";
+            }else{
+                this.charlies_message = "Why Should I Continue? We Are not Friends? As A Matter Of Fact, I Am Wiping You From My Memory! Goodbye";
+            }
+            const vm = this;
+            this.ask_about_observations = false;
+            setTimeout(() => {
+                vm.continue_the_explanation = true;
+            },1200);
+            setTimeout(() => {
+                location.reload();
+            },5000)
+
+        },
         transitionToFinal(){
             const vm = this;
-            // this.play_game = false;
+            // this.[some-condition] = false;
             setTimeout(() => {
                 vm.final = true;
             },1200);

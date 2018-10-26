@@ -20,7 +20,8 @@
                         <li class="list-group-item" v-if="openly_greeted_AI">You Openly Greeted Charlie When He Introduced Himself.</li>
                         <li class="list-group-item" v-if="funny_name_AI">You Insulted Charlie When He Introduced Himself.</li>
                         <li class="list-group-item" v-if="gave_name_first_time">You Gave Charlie Your Name (real or not) The First Time He Asked.</li>
-                        <li class="list-group-item" v-if="gave_name_after_attempts">You Gave Charlie Your Name After @{{ name_attempt_counter }} Times He Asked You For It.</li>
+                        <li class="list-group-item" v-if="gave_name_after_attempts && !no_to_being_friends">You Gave Charlie Your Name After @{{ name_attempt_counter }} Times He Asked You For It.</li>
+                        <li class="list-group-item" v-if="no_to_being_friends">You Decided Not To Be Charlies Friend (how sad).</li>
                         <li class="list-group-item" v-if="agreed_to_play_game">You Decided To Play A Game With Charlie</li>
                         <li class="list-group-item" v-if="agreed_to_play_game">The Color You Chose To Play The Game Was @{{ color_of_tic_tac_toe }}</li>
                         <li class="list-group-item" v-if="agreed_to_play_game">You Played Tic-Tac-Toe Against Charlie A Total Of @{{ played_tic_tac_toe  }} times.</li>

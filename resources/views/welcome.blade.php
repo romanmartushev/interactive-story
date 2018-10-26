@@ -28,6 +28,15 @@
                 @include('partials.ticTacToe')
             </transition>
             <transition name="fade" v-cloak>
+                @include('charlie.charlie4')
+            </transition>
+            <transition name="fade" v-cloak>
+                @include('charlie.charlie5')
+            </transition>
+            <transition name="fade" v-cloak>
+                @include('charlie.charlie6')
+            </transition>
+            <transition name="fade" v-cloak>
                 @include('partials.final')
             </transition>
         </div>
