@@ -136,7 +136,7 @@ var app = new Vue({
         },
         transitionToFinal(){
             const vm = this;
-            this.play_game = false;
+            // this.play_game = false;
             setTimeout(() => {
                 vm.final = true;
             },1200);
