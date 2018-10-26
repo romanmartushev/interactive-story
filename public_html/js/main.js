@@ -10792,7 +10792,7 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
         },
         transitionToFinal: function transitionToFinal() {
             var vm = this;
-            this.play_game = false;
+            // this.play_game = false;
             setTimeout(function () {
                 vm.final = true;
             }, 1200);
