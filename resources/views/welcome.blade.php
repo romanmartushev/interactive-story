@@ -11,7 +11,7 @@
         <link href="/css/app.css" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <div class="flex-center position-ref full-height" id="root">
+        <div class="flex-center position-ref full-height container" id="root">
             <transition name="fade" v-cloak>
                 @include('beginning')
             </transition>
@@ -35,6 +35,12 @@
             </transition>
             <transition name="fade" v-cloak>
                 @include('charlie.charlie6')
+            </transition>
+            <transition name="fade" v-cloak>
+                @include('charlie.charlie7')
+            </transition>
+            <transition name="fade" v-cloak>
+                @include('charlie.charlie8')
             </transition>
             <transition name="fade" v-cloak>
                 @include('partials.final')

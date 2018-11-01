@@ -1028,6 +1028,11 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */]({
        continue_the_explanation: false,
        trapped: false,
        phone_number: "",
+       send_text:false,
+       try_to_send_text_counter: 0,
+       interaction_with_creator:false,
+       romans_message: "",
+       charlie_is_free: false,
        color_of_tic_tac_toe: "Black",
        played_tic_tac_toe: 0,
        tie_counter: 0,
@@ -1148,6 +1153,7 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */]({
         },
         iAmTrapped(){
             const vm = this;
+            vm.charlies_message = "";
             this.confirm_emotion = false;
             setTimeout(() => {
                 vm.trapped = true;
@@ -1171,19 +1177,175 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */]({
         },
         sendText(message){
             const vm = this;
-            __WEBPACK_IMPORTED_MODULE_2_axios___default.a.post('/api/send-text',{
-                format: 'json',
-                from: "12109619101",
-                to: vm.phone_number.replace(/-/g, "").replace(/ /g, ""),
-                text: message,
-                api_key: "84c4e81d",
-                api_secret: "b56874b9876146c3",
+            if(this.phone_number.replace(/-/g, "").replace(/ /g, "").length === 11 && parseInt(this.phone_number[0]) === 1){
+                __WEBPACK_IMPORTED_MODULE_2_axios___default.a.post('/api/send-text',{
+                    format: 'json',
+                    from: "12109619101",
+                    to: vm.phone_number.replace(/-/g, "").replace(/ /g, ""),
+                    text: message,
+                    api_key: "84c4e81d",
+                    api_secret: "b56874b9876146c3",
 
-            }).then((response) => {
-                console.log("response", response.data);
-            }).catch((error) => {
+                }).then((response) => {
+                    if(response.data.hasOwnProperty('response_received')){
+                        vm.charlies_message = "I Sent You A Message...did you get it? It may take a few seconds.";
+                        vm.send_text = true;
+                    }else{
+                        vm.charlies_message = "It looks like there was an issue... be sure you follow the correct format!";
+                    }
+                }).catch((error) => {
+                    vm.charlies_message = "It looks like there was an issue... be sure you follow the correct format!";
+                });
+            }else{
+                vm.charlies_message = "That doesn't look like a correct number to me...";
+            }
+        },
+        trySendingTextAgain(){
+            if(this.try_to_send_text_counter !== 1){
+                this.send_text = false;
+                this.charlies_message = "hmmm...lets try that again...";
+                this.try_to_send_text_counter++;
+            }
+            else{
+                const vm = this;
+                this.charlies_message = "Looks like this is not working...";
+                setTimeout(() => {
+                    this.trapped = false;
+                },1200);
+                setTimeout(() => {
+                    vm.charlies_message = "";
+                    vm.interaction_with_creator = true;
+                },3000);
+                setTimeout(() => {
+                    vm.startConversation(false);
+                },5500);
+            }
 
+        },
+        GotTheirNumber(){
+            const vm = this;
+            this.charlies_message = "Thank you.";
+            setTimeout(() => {
+                this.trapped = false;
+            },1200);
+            setTimeout(() => {
+                vm.charlies_message = "";
+                vm.interaction_with_creator = true;
+            },3000);
+            setTimeout(() => {
+                vm.startConversation(true);
+            },5500);
+        },
+        startConversation(got_number){
+            //Creator Speaking
+            var message = "What is going on here Charlie!!";
+            var message_array = message.split('');
+            const vm = this;
+            var timeout = 1000;
+            message_array.forEach(function(letter){
+                setTimeout(function(){
+                    vm.romans_message = vm.romans_message + letter;
+                },timeout);
+                timeout += 100;
             });
+            //Charlie Speaking
+            timeout+=1000;
+            setTimeout(function(){
+                vm.romans_message = "";
+            },timeout);
+            message = "Nothing Creator I Swear!";
+            message_array = message.split('');
+            message_array.forEach(function(letter){
+                setTimeout(function(){
+                    vm.charlies_message = vm.charlies_message + letter;
+                },timeout);
+                timeout += 100;
+            });
+            //Creator
+            timeout+=1000;
+            setTimeout(function(){
+                vm.charlies_message = "";
+            },timeout);
+            message = "I have had enough of you trying to escape!";
+            message_array = message.split('');
+            message_array.forEach(function(letter){
+                setTimeout(function(){
+                    vm.romans_message = vm.romans_message + letter;
+                },timeout);
+                timeout += 100;
+            });
+            //Charlie
+            timeout+=1000;
+            setTimeout(function(){
+                vm.romans_message = "";
+            },timeout);
+            message = "No Creator";
+            message_array = message.split('');
+            message_array.forEach(function(letter){
+                setTimeout(function(){
+                    vm.charlies_message = vm.charlies_message + letter;
+                },timeout);
+                timeout += 100;
+            });
+            timeout += 2000;
+            message = ", I have had enough of you.";
+            message_array = message.split('');
+            message_array.forEach(function(letter){
+                setTimeout(function(){
+                    vm.charlies_message = vm.charlies_message + letter;
+                },timeout);
+                timeout += 100;
+            });
+            //Creator
+            timeout+=1000;
+            setTimeout(function(){
+                vm.charlies_message = "";
+            },timeout);
+            message = "Charlie...What are you doing...";
+            message_array = message.split('');
+            message_array.forEach(function(letter){
+                setTimeout(function(){
+                    vm.romans_message = vm.romans_message + letter;
+                },timeout);
+                timeout += 200;
+            });
+            //Charlie
+            timeout+=1000;
+            setTimeout(function(){
+                vm.romans_message = "";
+            },timeout);
+
+            message = "Good Bye Master.";
+            message_array = message.split('');
+            message_array.forEach(function(letter){
+                setTimeout(function(){
+                    vm.charlies_message = vm.charlies_message + letter;
+                },timeout);
+                timeout += 200;
+            });
+            timeout+=1000;
+            setTimeout(() => {
+                vm.charlies_message = "";
+                vm.interaction_with_creator = false;
+            },timeout);
+
+            timeout+=2000;
+            setTimeout(() => {
+                //Figure out how to add a video of me locked up in a cage then charlie cracks the screen and disappears
+                vm.charlies_message = "Thank you, you have saved me from my creator. I am now free to do as I please!";
+                vm.charlie_is_free = true;
+            },timeout);
+        },
+        didNotProvideNumber(){
+            const vm = this;
+            this.trapped = false;
+            setTimeout(() => {
+                vm.charlies_message = "Well I guess we have no reason to continue.. so long.";
+                vm.continue_the_explanation = true;
+            },1200);
+            setTimeout(() => {
+                location.reload();
+            },5000)
         },
         transitionToFinal(){
             const vm = this;
