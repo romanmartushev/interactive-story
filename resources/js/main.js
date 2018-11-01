@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import $ from 'jquery'
+import axios from 'axios'
 
 Vue.component('modal',{
     template: `
@@ -49,6 +50,8 @@ var app = new Vue({
        ask_about_observations: false,
        agreed_to_play_game: false,
        continue_the_explanation: false,
+       trapped: false,
+       phone_number: "",
        color_of_tic_tac_toe: "Black",
        played_tic_tac_toe: 0,
        tie_counter: 0,
@@ -168,7 +171,11 @@ var app = new Vue({
             },1200);
         },
         iAmTrapped(){
-            //TO DO
+            const vm = this;
+            this.confirm_emotion = false;
+            setTimeout(() => {
+                vm.trapped = true;
+            },1200);
         },
         continueExplanation(bad_thing){
             if(bad_thing){
@@ -186,6 +193,22 @@ var app = new Vue({
             },5000)
 
         },
+        sendText(){
+            const vm = this;
+            axios.post('/api/send-text',{
+                format: 'json',
+                from: process.env.NEXMO_NUMBER,
+                to: "12182805085",
+                text: "hello",
+                api_key: process.env.NEXMO_API_KEY,
+                api_secret: process.env.NEXMO_API_SECRET,
+
+            }).then((response) => {
+                console.log("response", response);
+            }).catch((error) => {
+
+            });
+        },
         transitionToFinal(){
             const vm = this;
             // this.[some-condition] = false;
@@ -196,6 +219,9 @@ var app = new Vue({
         saveFriendship(){
 
         }
+    },
+    mounted(){
+       this.sendText();
     }
 });
 

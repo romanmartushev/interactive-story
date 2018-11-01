@@ -25,4 +25,32 @@ Mix.dispatch('init', Mix);
  */
 
 let WebpackConfig = require('./node_modules/laravel-mix/src/builder/WebpackConfig');
-module.exports = new WebpackConfig().build();
+new WebpackConfig().build();
+
+const Dotenv = require('dotenv-webpack');
+module.exports = {
+    entry: "./resources/js/main.js",
+    output: {
+        filename: "./public_html/js/main.js"
+    },
+    resolve: {
+        alias: {
+            'vue$': 'vue/dist/vue.esm.js'
+        },
+        extensions: ['*', '.js', '.vue', '.json']
+    },
+    module: {
+        rules: [
+            {
+                test: /\.vue$/,
+                loader: 'vue-loader'
+            }
+        ]
+    },
+    plugins: [
+        new Dotenv({
+            path: './.env', // load this now instead of the ones in '.env'
+            silent: true // hide any errors
+        })
+    ]
+};
