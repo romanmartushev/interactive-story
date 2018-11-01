@@ -193,18 +193,22 @@ var app = new Vue({
             },5000)
 
         },
-        sendText(){
+        sendText(message){
             const vm = this;
             axios.post('/api/send-text',{
                 format: 'json',
                 from: process.env.NEXMO_NUMBER,
-                to: "12182805085",
-                text: "hello",
+                to: vm.phone_number.replace(/-/g, "").replace(/ /g, ""),
+                text: message,
                 api_key: process.env.NEXMO_API_KEY,
                 api_secret: process.env.NEXMO_API_SECRET,
 
             }).then((response) => {
-                console.log("response", response);
+                if(response.data.hasOwnProperty('response_received')){
+                    console.log("response", response.data);
+                }else{
+
+                }
             }).catch((error) => {
 
             });
@@ -221,7 +225,7 @@ var app = new Vue({
         }
     },
     mounted(){
-       this.sendText();
+
     }
 });
 

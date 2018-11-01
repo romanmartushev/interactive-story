@@ -25,7 +25,7 @@ class NexmoAPIController extends Controller
         try{
             return ['response_received' => $response->getResponseData()];
         }catch(\Exception $e){
-            return $e;
+            return ['error' => $e];
         }
     }
 }

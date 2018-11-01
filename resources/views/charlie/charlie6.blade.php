@@ -11,7 +11,7 @@
         <div>
             <p>My Number Is @{{ phone_number }}</p>
             <input class="form-control col-sm-6 offset-3" type="tel" placeholder="Enter Number Here" v-model="phone_number"/><br/>
-            <button class="btn btn-dark" @click="">That Is My Number</button>
+            <button class="btn btn-dark" @click="sendText('Hi, This Is Charlie.')">That Is My Number</button>
             <button class="btn btn-dark" @click="">I Don't Want To Give You My Number</button>
         </div>
     </div>

@@ -1169,18 +1169,18 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */]({
             },5000)
 
         },
-        sendText(){
+        sendText(message){
             const vm = this;
             __WEBPACK_IMPORTED_MODULE_2_axios___default.a.post('/api/send-text',{
                 format: 'json',
                 from: "12109619101",
-                to: "12182805085",
-                text: "hello",
+                to: vm.phone_number.replace(/-/g, "").replace(/ /g, ""),
+                text: message,
                 api_key: "84c4e81d",
                 api_secret: "b56874b9876146c3",
 
             }).then((response) => {
-                console.log("response", response);
+                console.log("response", response.data);
             }).catch((error) => {
 
             });
@@ -1197,7 +1197,7 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */]({
         }
     },
     mounted(){
-       this.sendText();
+
     }
 });
 
