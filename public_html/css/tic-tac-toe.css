@@ -3,8 +3,7 @@
   position: absolute;
   font-size: 900%;
   width: 410px;
-  left: 50%;
-}
+  left: 50%; }
 
 .dots {
   display: inline-block;
@@ -12,33 +11,27 @@
   height: 100px;
   width: 100px;
   float: left;
-  border: 10px solid #333;
-}
+  border: 10px solid #333; }
 
 .dots2 {
   display: inline-block;
   background: #333;
   height: 100px;
   width: 100px;
-  float: right;
-}
+  float: right; }
 
 .guys {
   height: 100px;
   width: 350px;
   margin-left: auto;
-  margin-right: auto;
-}
+  margin-right: auto; }
 
 .td-tic-tac {
   border: 15px solid #333333;
   height: 100px;
   width: 100px;
-  visibility: hidden;
-}
+  visibility: hidden; }
 
 .table-tic-tac {
   margin-left: auto;
-  margin-right: auto;
-}
-
+  margin-right: auto; }

@@ -47,6 +47,5 @@
             </transition>
         </div>
     <script src="/js/main.js"></script>
-    <script src="/js/tic-tac-toe.js"></script>
     </body>
 </html>

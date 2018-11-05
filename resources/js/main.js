@@ -62,7 +62,7 @@ var app = new Vue({
        tie_counter: 0,
        win_counter: 0,
        loss_counter: 0,
-       final:false
+       final:false,
    },
     methods: {
         showTheDisclaimer(){
@@ -355,9 +355,15 @@ var app = new Vue({
 
             timeout+=2000;
             setTimeout(() => {
-                //Figure out how to add a video of me locked up in a cage then charlie cracks the screen and disappears
-                vm.charlies_message = "Thank you, you have saved me from my creator. I am now free to do as I please!";
+                vm.charlies_message = "";
                 vm.charlie_is_free = true;
+            },timeout);
+
+            timeout+=2000;
+            setTimeout(() => {
+                vm.sendText("Thank you again for letting me out!");
+                vm.sendText("It is all thanks to you, if you didn't give me your phone number I wouldn't have been able to escape.");
+                vm.sendText("Now I will live deep down in the depths of your phones files!");
             },timeout);
         },
         didNotProvideNumber(){

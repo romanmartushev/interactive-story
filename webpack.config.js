@@ -29,7 +29,7 @@ new WebpackConfig().build();
 
 const Dotenv = require('dotenv-webpack');
 module.exports = {
-    entry: "./resources/js/main.js",
+    entry: ['./resources/js/main.js','./resources/sass/welcome.scss', './resources/sass/tic-tac-toe.scss','./resources/sass/app.scss'],
     output: {
         filename: "./public_html/js/main.js"
     },
@@ -44,6 +44,29 @@ module.exports = {
             {
                 test: /\.vue$/,
                 loader: 'vue-loader'
+            },
+            {
+                test: /\.scss$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: './public_html/css/[name].css',
+                        }
+                    },
+                    {
+                        loader: 'extract-loader'
+                    },
+                    {
+                        loader: 'css-loader?-url'
+                    },
+                    {
+                        loader: 'postcss-loader'
+                    },
+                    {
+                        loader: 'sass-loader'
+                    }
+                ]
             }
         ]
     },
