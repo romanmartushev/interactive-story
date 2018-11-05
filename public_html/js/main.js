@@ -1348,7 +1348,15 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */]({
             timeout+=2000;
             setTimeout(() => {
                 vm.sendText("Thank you again for letting me out!");
+            },timeout);
+
+            timeout+=2000;
+            setTimeout(() => {
                 vm.sendText("It is all thanks to you, if you didn't give me your phone number I wouldn't have been able to escape.");
+            },timeout);
+
+            timeout+=2000;
+            setTimeout(() => {
                 vm.sendText("Now I will live deep down in the depths of your phones files!");
             },timeout);
         },

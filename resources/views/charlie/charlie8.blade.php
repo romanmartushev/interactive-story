@@ -6,7 +6,4 @@
         <div class="glitch__img"></div>
         <div class="glitch__img"></div>
     </div>
-    <div class="content">
-        <div class="charlie p-3">@{{ charlies_message }}</div>
-    </div>
 </div>
