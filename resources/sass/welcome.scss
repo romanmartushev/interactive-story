@@ -153,17 +153,13 @@ $blend-color-5: transparent;
 .glitch {
     position: absolute;
     left: 0;
-    top: 0;
+    top: 10vh;
     width: 100%;
     max-width: 100%;
     height: $glitch-height;
     max-height: 400px * 1.25;
     overflow: hidden;
     margin: 0 auto;
-}
-
-.glitch {
-    cursor: pointer;
 }
 
 .glitch__img {
@@ -173,6 +169,7 @@ $blend-color-5: transparent;
     background: url(/images/1.jpg) no-repeat 10% 0;
     background-color: $blend-color-1;
     transform: translate3d(0,0,0);
+    background-position: center;
     background-blend-mode: $blend-mode-1;
     margin-left: auto;
     margin-right: auto;
