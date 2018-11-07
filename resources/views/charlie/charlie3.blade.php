@@ -3,7 +3,7 @@
         <div class="charlie m-b-md">Hi @{{ name }} :) <br/> do you want to play a game?</div>
         <div>
             <button class="btn btn-dark" @click="transitionToPlayGame">Ok</button>
-            <button class="btn btn-dark" @click="">Not Really</button>
+            <button class="btn btn-dark" @click="transitionToHurtFeelings">Not Really</button>
         </div>
     </div>
 </div>

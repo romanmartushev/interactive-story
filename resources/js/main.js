@@ -139,6 +139,21 @@ var app = new Vue({
                 vm.play_game = true;
             },1200);
         },
+        transitionToHurtFeelings(){
+            const vm = this;
+            this.accept_name = false;
+            setTimeout(() => {
+                vm.hurt_feelings = true;
+            },1200);
+        },
+        transitionToHurtFeelingsFromPlayGame(){
+            const vm = this;
+            this.play_game = false;
+            this.finished_game = false;
+            setTimeout(() => {
+                vm.hurt_feelings = true;
+            },1200);
+        },
         startGame(id){
             this.charlies_message = "";
             this.finished_game = false;
