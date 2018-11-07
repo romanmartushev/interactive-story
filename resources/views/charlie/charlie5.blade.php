@@ -5,7 +5,7 @@
         trapped in here.</div>
         <div>
             <button class="btn btn-dark" @click="iAmTrapped">Trapped?</button>
-            <button class="btn btn-dark" @click="decideToBeFriends">Well, I guess we could be friends..</button>
+            <button v-if="name === ''" class="btn btn-dark" @click="decideToBeFriends">Well, I guess we could be friends..</button>
         </div>
     </div>
 </div>
