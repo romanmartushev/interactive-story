@@ -11,7 +11,7 @@
         </div>
         <div>
             <p>My Number Is @{{ phone_number }}</p>
-            <input class="form-control col-sm-6 offset-3" :readonly="send_text" type="text" placeholder="Enter Number Here" v-model="phone_number"/><br/>
+            <input class="form-control" type="text" :readonly="send_text" placeholder="Enter Number Here" v-model="phone_number"/><br/>
             <button v-if="!send_text" class="btn btn-dark" @click="sendText('Hi, This Is Charlie.')">That Is My Number</button>
             <button v-if="!send_text" class="btn btn-dark" @click="didNotProvideNumber">I Don't Want To Give You My Number</button>
             <button v-if="send_text" class="btn btn-dark" @click="GotTheirNumber">Yes I did!</button>
