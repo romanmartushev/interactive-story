@@ -4,7 +4,7 @@
         all the observations I have taken on humans I would say I should be sad. Is this a correct Observation?</div>
         <div>
             <button class="btn btn-dark" @click="confirmCharliesEmotion">Yes It Is</button>
-            <button class="btn btn-dark" @click="askCharlieAboutObservations">What Sort Of Observations?</button>
+            <button v-if="name === ''" class="btn btn-dark" @click="askCharlieAboutObservations">What Sort Of Observations?</button>
         </div>
     </div>
 </div>
