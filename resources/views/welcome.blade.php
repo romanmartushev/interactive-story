@@ -43,6 +43,9 @@
                 @include('charlie.charlie8')
             </transition>
             <transition name="fade" v-cloak>
+                @include('charlie.charlieImages')
+            </transition>
+            <transition name="fade" v-cloak>
                 @include('partials.final')
             </transition>
         </div>

@@ -12,3 +12,20 @@
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
+
+.cell-image {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-right: -1px;
+    margin-bottom: -1px;
+}
+.cell-image:nth-child(3n) {
+    margin-right: 0;
+}
+.cell-image:nth-child(27n) {
+    margin-bottom: 0;
+}
+.cell-image-move {
+    transition: transform 1s;
+}
