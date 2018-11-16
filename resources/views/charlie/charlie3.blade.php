@@ -13,6 +13,7 @@
         <div>
             <button class="btn btn-dark" @click="transitionBackToCharlie2">Ok I Will Give You My Name</button>
             <button class="btn btn-dark" @click="transitionToCharlie4">I Can't Be Friends With An Entity</button>
+            <button class="btn btn-dark" @click.stop="toggle ? endSpeechRecognition() : startSpeechRecognition()">Speak</button>
         </div>
     </div>
 </div>

@@ -5,6 +5,7 @@
         <div>
             <button class="btn btn-dark" @click="confirmCharliesEmotion">Yes It Is</button>
             <button v-if="name === ''" class="btn btn-dark" @click="askCharlieAboutObservations">What Sort Of Observations?</button>
+            <button class="btn btn-dark" @click.stop="toggle ? endSpeechRecognition() : startSpeechRecognition()">Speak</button>
         </div>
     </div>
 </div>

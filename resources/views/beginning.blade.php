@@ -21,7 +21,7 @@
         <div>
             <button class="btn btn-dark" @click="show = true">Background</button>
             <button class="btn btn-dark" @click="transitionToMeetCharlie">Begin</button>
-            <button class="btn btn-dark" @click.stop="toggle ? endSpeechRecognition(transitionToMeetCharlie) : startSpeechRecognition()">Speak</button>
+            <button class="btn btn-dark" @click.stop="toggle ? endSpeechRecognition() : startSpeechRecognition()">Speak</button>
             <a class="btn btn-dark" href="https://github.com/romanmartushev/interactive-story" target="_blank" role="button">GitHub</a>
         </div>
         <div class="mt-3">
